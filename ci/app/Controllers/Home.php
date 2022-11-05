@@ -16,6 +16,7 @@ class Home extends BaseController
     {
         $Logs = new \App\Models\Logs();
         $incoming = $this->request->getPost();
+        $incoming = hash_hmac('sha512', $incoming, $_ENV['caSK']);
         $Logs->insert(['logs'=>json_encode($incoming), 'type'=>'collectAfrica']);
     }
 
